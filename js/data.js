@@ -84,6 +84,7 @@ const CATEGORIES = {
   cafe:      { label: "Café",        icon: "☕", color: "#8a6240" },
   park:      { label: "Park & view", icon: "🌳", color: "#4f8a53" },
   market:    { label: "Market",      icon: "🧺", color: "#a8863b" },
+  swimming:  { label: "Swimming",    icon: "🏊", color: "#1f9e9e" },
   // Add your own, e.g.:
   // shop:   { label: "Shop",        icon: "🛍️", color: "#6b7f9e" },
 };
@@ -475,52 +476,116 @@ const DISTRICTS = [
 
   /* ══════════════════════════════════════════════════════════════ */
   {
-    name: "Zwierzyniec & Błonia",
-    icon: "🌳",
+    name: "Zwierzyniec - Las Wolski",
+    icon: "🌲",
     color: "#4f8a53",
     area: [
-      [50.0642, 19.9202], [50.0620, 19.9118], [50.0572, 19.8898],
-      [50.0540, 19.8930], [50.0535, 19.9082], [50.0572, 19.9232]
+      [50.0516, 19.9141],
+      [50.0538, 19.9129],
+      [50.0583, 19.8991],
+      [50.0644, 19.8818],
+      [50.0702, 19.8574],
+      [50.0676, 19.8510],
+      [50.0675, 19.8246],
+      [50.0613, 19.8093],
+      [50.0450, 19.8062],
+      [50.0311, 19.8186],
+      [50.0429, 19.8480],
+      [50.0441, 19.8716],
+      [50.0385, 19.8807],
+      [50.0391, 19.8984],
+      [50.0508, 19.9087]
     ],
-    tagline: "The green west: a vast meadow, a mound with a view, and a flooded quarry.",
+    tagline: "West of the centre: two mounds, a forest, and the zoo.",
     description: [
-      "West of the centre the city opens out. Błonia is a genuinely enormous common — 48 hectares of uninterrupted grass, ten minutes' walk from the Old Town, historically used for grazing and now for festivals, papal masses and cycling.",
-      "Beyond it the ground rises into wooded hills with the Kościuszko Mound on top, and to the south there's a flooded limestone quarry with water an implausible shade of turquoise."
+      "Zwierzyniec was its own village before Kraków absorbed it, and most of what's out here is still more forest than street — Las Wolski, a genuinely large wooded hill, takes up most of this stretch.",
+      "The two mounds bookend it: Kościuszko Mound near the city edge, and the much larger Piłsudski Mound deep in the trees. The zoo and a small nature reserve fill in the middle."
     ],
     places: [
-      {
-        name: "Błonia Meadow",
-        category: "park",
-        // `area` draws a filled shape — right for a place with real extent.
-        // No `coords` needed: the pin is placed in the middle automatically.
-        area: [
-          [50.0640, 19.9160], [50.0616, 19.9052],
-          [50.0578, 19.9080], [50.0592, 19.9175]
-        ],
-        description: "Forty-eight hectares of completely flat, completely uninterrupted grass, ten minutes' walk from the Old Town — a stranger thing to find in the middle of a European city than it sounds. Cycle across it, or walk the perimeter path on towards Kościuszko Mound.",
-        tip: "Historically common grazing land, which is why it was never built on. It still legally can't be."
-      },
       {
         name: "Kościuszko Mound",
         namePl: "Kopiec Kościuszki",
         category: "park",
-        coords: [50.0546, 19.8955],
+        coords: [50.05511156946897, 19.893278338803775],
         description: "An artificial mound raised in the 1820s in honour of Tadeusz Kościuszko, later wrapped in an Austrian brick fort. Spiral path to the top and a wide view over the city and the Vistula valley.",
         price: "Ticketed, unlike Krakus Mound.",
         tip: "If you only climb one mound and you want the view with a café at the bottom, climb this one. If you want the view for free and with fewer people, climb Krakus."
       },
       {
-        name: "Zakrzówek",
+        name: "Piłsudski Mound",
+        namePl: "Kopiec Józefa Piłsudskiego",
         category: "park",
-        coords: [50.0353, 19.9055],
-        description: "A flooded limestone quarry with sheer white cliffs and startlingly turquoise water, now with a proper swimming area and walkways.",
-        tip: "Swim only in the supervised zone — the quarry is very deep and very cold, and people have drowned here."
+        coords: [50.060406313849676, 19.847241445722034],
+        description: "The largest of Kraków's four mounds, built between 1934 and 1937 on Sowiniec hill from earth donated from battlefields across Poland and abroad, honouring Marshal Józef Piłsudski. Deep in Las Wolski forest, well away from the crowds the other mounds get.",
+        tip: "Combine it with a walk through the forest, or the zoo further down the hill."
       },
       {
-        name: "Norbertine Convent",
-        category: "church",
-        coords: [50.0518, 19.9005],
-        description: "A fortified white convent on the riverbank at the far end of the Błonia walk, founded in the 12th century. A good turning point before heading back along the Vistula."
+        name: "Kraków Zoo",
+        namePl: "ZOO Kraków",
+        category: "landmark",
+        coords: [50.05511637016435, 19.85434378092075],
+        description: "One of the oldest zoos in Poland, built into the wooded, hilly edge of Las Wolski rather than laid out as a flat grid of enclosures. Several hundred species; a proper half-day out rather than a quick stop."
+      },
+      {
+        name: "Panieńskie Skały Nature Reserve",
+        namePl: "Rezerwat Przyrody Panieńskie Skały",
+        category: "park",
+        coords: [50.0611348478027, 19.859003581539007],
+        description: "A small nature reserve of limestone rock outcrops tucked into Las Wolski, quiet and largely free of the crowds that gather at Zakrzówek or Skałki Twardowskiego. A short, easy scramble rather than a serious hike."
+      },
+      {
+        name: "Jagiellonian University Astronomical Observatory",
+        namePl: "Obserwatorium Astronomiczne UJ",
+        category: "museum",
+        coords: [50.0543243871766, 19.82664901651445],
+        description: "A working astronomical observatory in a former 19th-century Austrian fort on a hilltop in Las Wolski, run by the Jagiellonian University. Runs public tours and stargazing evenings.",
+        hours: "Limited and weather-dependent — check ahead before making the trip out."
+      }
+    ]
+  },
+
+  /* ══════════════════════════════════════════════════════════════ */
+  {
+    name: "Dębniki - Ludwinów",
+    icon: "⛰️",
+    color: "#8a6240",
+    area: [
+      [50.0538, 19.9304],
+      [50.0512, 19.9208],
+      [50.0502, 19.9092],
+      [50.0383, 19.8974],
+      [50.0319, 19.9117],
+      [50.0317, 19.9203],
+      [50.0439, 19.9408],
+      [50.0451, 19.9375]
+    ],
+    tagline: "The quiet south bank, directly across the river from Wawel.",
+    description: [
+      "Dębniki sits on the left bank of the Vistula, facing the Old Town and Wawel across the water — an independent village until it was absorbed into Kraków in the early 20th century. Ludwinów, its riverside stretch, was historically home to brickworks and quarries rather than churches and palaces.",
+      "It's mostly residential and low-key today, best known for the boulevards along the river and for a young Karol Wojtyła — later Pope John Paul II — who lived and worshipped here before the priesthood."
+    ],
+    places: [
+      {
+        name: "Kąpielisko Zakrzówek",
+        category: "swimming",
+        coords: [50.03450345571533, 19.912620016343137],
+        description: "The managed bathing zone at the Zakrzówek quarry lake — a fenced, lifeguard-supervised stretch of the same startlingly turquoise water, with proper changing rooms and a paid entry rather than just scrambling down the rocks.",
+        tip: "Ticketed and seasonal (roughly May–September), with lifeguards on duty — the safest way to swim here."
+      },
+      {
+        name: "Skałki Twardowskiego",
+        category: "park",
+        coords: [50.04109252248143, 19.90398675356491],
+        description: "Jagged limestone outcrops right next to the Zakrzówek quarry, named for Pan Twardowski — the legendary sorcerer said to have struck a deal with the devil and been swept off from here to the moon. A popular short scramble with views down over the turquoise water, and a proper draw for rock climbers.",
+        tip: "Easy to combine with a visit to Zakrzówek — it's a five-minute walk between the two."
+      },
+      {
+        name: "Manggha Museum",
+        namePl: "Muzeum Sztuki i Techniki Japońskiej Manggha",
+        category: "museum",
+        coords: [50.05064514485184, 19.931579593036506],
+        description: "A striking modern building on the riverbank, designed by the Japanese architect Arata Isozaki, built to house Feliks 'Manggha' Jasieński's collection of Japanese art and prints — one of the largest such collections in Europe. Also runs temporary exhibitions and events tied to Japanese culture.",
+        tip: "The riverside terrace café is worth a stop even if you skip the galleries."
       }
     ]
   }
@@ -551,7 +616,7 @@ const TRIPS = [
   },
   {
     name: "Kryspinów",
-    category: "park",
+    category: "swimming",
     coords: [50.04760751714946, 19.791847461493877],
     description: "The most popular of the old sand-quarry lakes around Kraków, and the closest thing the city has to an actual sand beach — lifeguards, volleyball courts, paddleboard and kayak rental, and a genuinely lively atmosphere on a hot weekend. About 20 minutes west of the centre by bus.",
     tip: "Gets very crowded on summer weekends. Go on a weekday, or early, if you want space to actually lie down."
@@ -567,7 +632,7 @@ const TRIPS = [
   {
     name: "Bagry Beach",
     namePl: "Zalew Bagry",
-    category: "park",
+    category: "swimming",
     coords: [50.03298763667974, 19.993765040100666],
     description: "A large lake on a former sand quarry in the south of the city, and one of the places locals actually go to swim in summer rather than just tourists — day-trippers tend to head for Zakrzówek instead, which keeps this one comparatively uncrowded. Shoreline ranges from a developed beach with bars to quieter, wilder stretches."
   }
