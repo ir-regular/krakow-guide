@@ -212,6 +212,40 @@ const DISTRICTS = [
         tip: "The courtyard is free to walk into. Go for that alone even if you skip the museum."
       },
       {
+        name: "Skarbonka",
+        category: "landmark",
+        coords: [50.06194087599326, 19.93663826419436],
+        description: "A squat granite fountain on the square, nicknamed for its resemblance to a piggy bank (skarbonka). One of the two default meeting points on the Rynek — locals arrange to meet 'pod Skarbonką' without a second thought."
+      },
+      {
+        name: "Adam Mickiewicz Monument",
+        namePl: "Pomnik Adama Mickiewicza",
+        category: "landmark",
+        coords: [50.061479413039386, 19.938011555198578],
+        description: "A bronze statue of Poland's national poet, unveiled in 1898 and rebuilt after the original was melted down during the German occupation. The other default meeting point on the square — 'pod Adasiem' ('under Adaś', an affectionate nickname) is as common a rendezvous as any street address."
+      },
+      {
+        name: "Town Hall Tower",
+        namePl: "Wieża Ratuszowa",
+        category: "museum",
+        coords: [50.0615446964191, 19.936479980068253],
+        description: "The only surviving piece of the old Town Hall, demolished in the 1820s along with the city walls. Climbable, with a small history exhibit inside and a view over the square from the top."
+      },
+      {
+        name: "Rynek Underground",
+        namePl: "Podziemia Rynku",
+        category: "museum",
+        coords: [50.06194688769419, 19.93776970525552],
+        description: "An archaeological museum beneath the square itself, built around the excavated foundations of the medieval marketplace — stalls, roads and workshops preserved where they stood, with multimedia displays layered on top."
+      },
+      {
+        name: "St Adalbert's Church",
+        namePl: "Kościół św. Wojciecha",
+        category: "church",
+        coords: [50.060901076335774, 19.93775839199445],
+        description: "A small Romanesque church tucked into a corner of the square, and the oldest church in Kraków — parts of it predate the square's medieval layout, which grew up around it rather than the other way round."
+      },
+      {
         name: "Planty",
         category: "park",
         // A place can be a REGION rather than a point. `path` draws a line —
