@@ -1,0 +1,11 @@
+{
+  "name": "krakow-guide",
+  "private": true,
+  "description": "Automated checks for the Kraków guide. Entirely optional — the site itself has no dependencies and no build step; this is only here for anyone who wants to run the browser tests in tests.",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1"
+  }
+}
