@@ -82,6 +82,22 @@ const checkShape = (shape, kind, minPoints, at, box = BOX) => {
   });
 };
 
+// `months` is optional on a place/trip (only relevant part of the year —
+// a temporary exhibition, a festival). Must be integers 1-12, in the order
+// they run (app.js's monthsLabel() shows "first–last", so an out-of-order
+// list would print something misleading).
+const checkMonths = (months, at) => {
+  if (!Array.isArray(months) || !months.length) {
+    problems.push(`${at} has a malformed "months" (expected e.g. [6] or [12, 1, 2]).`);
+    return;
+  }
+  months.forEach((m) => {
+    if (!Number.isInteger(m) || m < 1 || m > 12) {
+      problems.push(`${at} has "${m}" in months — expected a whole number from 1 (Jan) to 12 (Dec).`);
+    }
+  });
+};
+
 const seenDistricts = new Set();
 
 DISTRICTS.forEach((d) => {
@@ -135,6 +151,8 @@ DISTRICTS.forEach((d) => {
     if (p.area && p.path) {
       problems.push(`${at} has both area and path. Use one or the other.`);
     }
+
+    if (p.months) checkMonths(p.months, at);
 
     if (shape) {
       const kind = p.area ? "area" : "path";
@@ -195,6 +213,8 @@ DISTRICTS.forEach((d) => {
   if (shape) {
     checkShape(shape, t.area ? "area" : "path", t.area ? 3 : 2, at, TRIP_BOX);
   }
+
+  if (t.months) checkMonths(t.months, at);
 
   if (t.name) {
     const tid = t.id || slug(t.name);
