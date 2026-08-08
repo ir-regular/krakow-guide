@@ -47,6 +47,14 @@
   const fallbackCategory = { label: "Place", icon: "📍", color: "#8a8078" };
   const categoryFor = (key) => CATEGORIES[key] || fallbackCategory;
 
+  // A search link (not a bare lat/lon pin) so it lands on the actual Google
+  // Maps listing — photos, reviews, opening hours — for anyone who wants to
+  // save the place to their own map. `area` just biases the search; it's
+  // not asserting the place is literally inside it (a day trip nowhere near
+  // Kraków still gets one, biased towards "Poland" instead).
+  const mapsSearchUrl = (name, area) =>
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${name}, ${area}`)}`;
+
   /* ── Seasonal places (temporary exhibitions, festivals, …) ──────
      A place or trip can give an optional `months` array (1-12) if it's
      only relevant part of the year. Nothing about the site requires it —
@@ -453,12 +461,13 @@
   // The chip + description + tip + facts block is identical for a place
   // and a trip — only the header and the back link differ, which each
   // caller sets up itself.
-  function placeBodyHtml(p, c, backHtml) {
+  function placeBodyHtml(p, c, backHtml, mapsArea) {
     const facts = [
       ["Address", p.address],
       ["Hours",   p.hours],
       ["Price",   p.price],
-      ["Link",    p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener">Website &nearr;</a>` : null]
+      ["Link",    p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener">Website &nearr;</a>` : null],
+      ["Map",     `<a href="${esc(mapsSearchUrl(p.name, mapsArea))}" target="_blank" rel="noopener">Open in Google Maps &nearr;</a>`]
     ].filter(([, v]) => v);
 
     return `<span class="chip">${c.icon} ${esc(c.label)}</span>` +
@@ -467,7 +476,7 @@
       (facts.length
         ? `<dl class="facts">` +
           facts.map(([k, v]) =>
-            `<div><dt>${k}</dt><dd>${k === "Link" ? v : esc(v)}</dd></div>`
+            `<div><dt>${k}</dt><dd>${k === "Link" || k === "Map" ? v : esc(v)}</dd></div>`
           ).join("") +
           `</dl>`
         : "") +
@@ -489,7 +498,8 @@
     setHeader(p.name, p.namePl, null, `Back to ${d.name}`, "/" + d.id);
 
     $("panel-body").innerHTML = placeBodyHtml(p, c,
-      `<button class="btn-primary" data-back="${d.id}">Back to ${esc(d.name)}</button>`);
+      `<button class="btn-primary" data-back="${d.id}">Back to ${esc(d.name)}</button>`,
+      `${d.name}, Kraków`);
 
     $("panel-body").querySelector("[data-back]")
       .addEventListener("click", () => { location.hash = "/" + d.id; });
@@ -514,7 +524,8 @@
     setHeader(t.name, t.namePl, null, "All districts", "");
 
     $("panel-body").innerHTML = placeBodyHtml(t, c,
-      `<button class="btn-primary" data-back>Back to all districts</button>`);
+      `<button class="btn-primary" data-back>Back to all districts</button>`,
+      "Poland");
 
     $("panel-body").querySelector("[data-back]")
       .addEventListener("click", () => { location.hash = ""; });
