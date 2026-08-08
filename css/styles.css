@@ -12,6 +12,7 @@
   --ink-faint:   #9a938b;
   --accent:      #b3441f;
   --accent-soft: #f6e7e0;
+  --pin-active:  #ff7a00;
   --line:        #e8e0d7;
   --shadow:      0 1px 3px rgba(35,32,29,.08), 0 8px 24px rgba(35,32,29,.06);
   --sidebar-w:   400px;
@@ -318,7 +319,7 @@ a { color: var(--accent); }
 .pin:hover { transform: scale(1.15); }
 .pin.is-active {
   transform: scale(1.2);
-  box-shadow: 0 0 0 4px var(--accent-soft), 0 2px 6px rgba(0,0,0,.3);
+  box-shadow: 0 0 0 4px var(--pin-active), 0 2px 6px rgba(0,0,0,.3);
 }
 
 .pin-district { width: 40px; height: 40px; font-size: 20px; }
