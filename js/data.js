@@ -250,6 +250,15 @@ const DISTRICTS = [
         description: "A small Romanesque church tucked into a corner of the square, and the oldest church in Kraków — parts of it predate the square's medieval layout, which grew up around it rather than the other way round."
       },
       {
+        name: "Nativity Scene Exhibition",
+        namePl: "Wystawa Szopek Krakowskich",
+        category: "museum",
+        coords: [50.06276823165592, 19.93661994505194],
+        months: [12, 1, 2],
+        description: "A permanent exhibition, in the Krzysztofory Palace, of szopki krakowskie — Kraków's distinctive nativity scenes, built as elaborate, turreted models of the city's own architecture rather than stables. Best appreciated after seeing the real landmarks they're modelled on.",
+        hours: "Only open December through February."
+      },
+      {
         name: "Planty",
         category: "park",
         // A place can be a REGION rather than a point. `path` draws a line —
