@@ -47,6 +47,26 @@
   const fallbackCategory = { label: "Place", icon: "📍", color: "#8a8078" };
   const categoryFor = (key) => CATEGORIES[key] || fallbackCategory;
 
+  /* ── Seasonal places (temporary exhibitions, festivals, …) ──────
+     A place or trip can give an optional `months` array (1-12) if it's
+     only relevant part of the year. Nothing about the site requires it —
+     omit it and the entry just shows all the time, as before.          */
+
+  const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  // [6] -> "Jun"   [11, 12] -> "Nov–Dec"   (assumes the months are already
+  // given in the order they run, same as any other ordered list in data.js)
+  const monthsLabel = (months) => {
+    const names = months.map((m) => MONTH_NAMES[m - 1]);
+    return names.length > 1 ? `${names[0]}–${names[names.length - 1]}` : names[0];
+  };
+
+  let selectedMonth = null;   // null = "any time" — the dropdown's default
+
+  const isInSeason = (entry) =>
+    selectedMonth === null || !entry.months || entry.months.includes(selectedMonth);
+
   /* ── Places that are regions, not points ────────────────────────
      A place may have an `area` (a filled shape, e.g. a park) or a
      `path` (a line, e.g. a ring or a stretch of wall) instead of —
@@ -257,7 +277,7 @@
       markersById[d.id] = marker;
     });
 
-    trips.forEach((t) => {
+    trips.filter(isInSeason).forEach((t) => {
       const shape = shapeOf(t);
       const c = categoryFor(t.category);
 
@@ -297,6 +317,8 @@
 
     setHeader(INTRO.title, null, INTRO.tagline, null, null);
 
+    const visibleTrips = trips.filter(isInSeason);
+
     $("panel-body").innerHTML =
       `<div class="prose">${prose(INTRO.description)}</div>` +
       `<div class="section-label">Districts</div>` +
@@ -309,14 +331,14 @@
               <span class="card-name">${esc(d.name)}</span>
               <span class="card-meta">${esc(d.tagline || "")}</span>
             </span>
-            <span class="card-count">${d.places.length}</span>
+            <span class="card-count">${d.places.filter(isInSeason).length}</span>
           </button>
         </li>`).join("") +
       `</ul>` +
-      (trips.length
+      (visibleTrips.length
         ? `<div class="section-label">Day trips</div>` +
           `<ul class="card-list">` +
-          trips.map((t) => {
+          visibleTrips.map((t) => {
             const c = categoryFor(t.category);
             return `
         <li>
@@ -326,6 +348,7 @@
               <span class="card-name">${esc(t.name)}</span>
               <span class="card-meta">${esc(c.label)}</span>
             </span>
+            ${t.months ? `<span class="card-badge" title="Only ${monthsLabel(t.months)}">🗓 ${monthsLabel(t.months)}</span>` : ""}
           </button>
         </li>`;
           }).join("") +
@@ -343,8 +366,13 @@
     markersById = {};
     shapesById = {};
 
+    // Out-of-season places are left off the map, except the one the URL
+    // points at directly — a shared link to a seasonal place shouldn't go
+    // pinless just because a different month is selected.
+    const visiblePlaces = d.places.filter((p) => isInSeason(p) || p.id === activePlaceId);
+
     // Shapes first, so the pins sit on top of them and stay clickable.
-    d.places.forEach((p) => {
+    visiblePlaces.forEach((p) => {
       const shape = shapeOf(p);
       if (!shape) return;
 
@@ -359,7 +387,7 @@
       shapesById[p.id] = { layer: drawn, place: p, color: c.color };
     });
 
-    d.places.forEach((p) => {
+    visiblePlaces.forEach((p) => {
       const c = categoryFor(p.category);
       const marker = L.marker(p.coords, {
         icon: pinIcon(c.icon, c.color, "place", p.name),
@@ -372,20 +400,22 @@
     });
 
     if (!activePlaceId) {
-      if (d.places.length > 1) {
+      if (visiblePlaces.length > 1) {
         // Frame the pins plus the full extent of any region-shaped places.
-        const bounds = L.latLngBounds(d.places.map((p) => p.coords));
-        d.places.forEach((p) => {
+        const bounds = L.latLngBounds(visiblePlaces.map((p) => p.coords));
+        visiblePlaces.forEach((p) => {
           const shape = shapeOf(p);
           if (shape) bounds.extend(L.latLngBounds(flattenPoints(shape)));
         });
         map.fitBounds(bounds, { padding: [60, 60] });
+      } else if (visiblePlaces.length === 1) {
+        map.setView(visiblePlaces[0].coords, d.zoom);
       } else {
         map.setView(d.center, d.zoom);
       }
     }
 
-    renderLegend(d.places);
+    renderLegend(visiblePlaces);
 
     const place = activePlaceId ? findPlace(d, activePlaceId) : null;
     if (place) renderPlace(d, place);
@@ -401,7 +431,7 @@
       (d.tip ? `<div class="tip"><strong>Good to know</strong>${esc(d.tip)}</div>` : "") +
       `<div class="section-label">Things to do here</div>` +
       `<ul class="card-list">` +
-      d.places.map((p) => {
+      d.places.filter(isInSeason).map((p) => {
         const c = categoryFor(p.category);
         return `
         <li>
@@ -411,6 +441,7 @@
               <span class="card-name">${esc(p.name)}</span>
               <span class="card-meta">${esc(c.label)}</span>
             </span>
+            ${p.months ? `<span class="card-badge" title="Only ${monthsLabel(p.months)}">🗓 ${monthsLabel(p.months)}</span>` : ""}
           </button>
         </li>`;
       }).join("") +
@@ -564,6 +595,18 @@
   }
 
   window.addEventListener("hashchange", route);
+
+  /* ── Filtering by month ────────────────────────────────────────
+     Lives in the header rather than panel-body, so it stays put (and
+     keeps its value) as you navigate between districts and places.   */
+
+  $("month-select").addEventListener("change", (e) => {
+    selectedMonth = e.target.value ? Number(e.target.value) : null;
+    // Forces route() to redraw the current view's pins/list from scratch,
+    // the same way a genuine navigation to a new district does.
+    currentView = null;
+    route();
+  });
 
   /* ── Mobile: collapse the panel to see the whole map ────────── */
 

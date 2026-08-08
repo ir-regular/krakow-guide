@@ -114,6 +114,10 @@ const CATEGORIES = {
      coords       [lat, lon] — required UNLESS you give an area or path
      area         optional   a filled shape: [[lat,lon], [lat,lon], …]
      path         optional   a line: [[lat,lon], [lat,lon], …]
+     months       optional   only relevant part of the year? e.g. [6] for
+                             June, or [12, 1, 2] for Dec-Feb. List the
+                             months in the order they run. Omit it and the
+                             place just shows all year round, as before.
      namePl, tip, address, hours, price, link   all optional
 
    PLACES THAT ARE REGIONS, NOT POINTS
