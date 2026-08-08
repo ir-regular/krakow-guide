@@ -1,0 +1,165 @@
+/* ============================================================
+   Boundary editor — adds to css/styles.css, which supplies the
+   shared #app / #sidebar / #map layout and colour variables.
+   ============================================================ */
+
+#panel-tagline code {
+  background: var(--accent-soft);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 13px;
+}
+
+.tool-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.tool-btn {
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+}
+.tool-btn.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.status {
+  margin: 0 0 18px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  min-height: 1.6em;
+}
+
+.action-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.action-row button {
+  flex: 1;
+  font: inherit;
+  font-size: 13px;
+  padding: 9px 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+}
+.action-row button:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.action-row button:disabled {
+  color: var(--ink-faint);
+  cursor: not-allowed;
+}
+
+.output-box {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color .15s;
+}
+.output-box.is-ready {
+  border-color: var(--accent);
+}
+
+#output {
+  margin: 0;
+  padding: 14px 60px 14px 14px;
+  font: 12.5px/1.55 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+#copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font: inherit;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+#copy-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+#copy-btn:disabled {
+  cursor: not-allowed;
+  color: var(--ink-faint);
+}
+
+.tip {
+  margin-top: 24px;
+  padding: 14px 16px;
+  background: var(--accent-soft);
+  border-radius: var(--radius);
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.tip strong {
+  display: block;
+  color: var(--ink);
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+/* ── Map-side bits ──────────────────────────────────────────── */
+
+#cursor-readout {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 500;
+  background: rgba(255, 255, 255, .9);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 3px 8px;
+  font: 11.5px/1.4 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color: var(--ink-soft);
+  pointer-events: none;
+}
+#cursor-readout:empty { display: none; }
+
+.vertex-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--accent);
+  box-shadow: 0 1px 3px rgba(35, 32, 29, .35);
+}
+.vertex-icon.vertex-first {
+  width: 16px;
+  height: 16px;
+}
+.vertex-icon.vertex-first-ready {
+  width: 18px;
+  height: 18px;
+  background: #2f7d4f;
+  border-color: #2f7d4f;
+  cursor: pointer;
+}
