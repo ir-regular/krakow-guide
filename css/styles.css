@@ -379,11 +379,18 @@ a { color: var(--accent); }
 @media (max-width: 780px) {
   #app { flex-direction: column; }
 
-  #map-wrap { flex: 1; }
+  #map-wrap { flex: 1; min-height: 0; }
 
   #sidebar {
     width: 100%;
     flex: 0 0 55%;
+    /* Flex items default to min-height: auto, meaning they refuse to
+       shrink below their content's height — without this, a long enough
+       card list pushes #sidebar past 55% and off the bottom of the
+       screen, squeezing #map-wrap (and the toggle button inside it) to
+       nothing instead of letting #panel-body's own overflow-y: auto
+       scroll internally the way it does at desktop width. */
+    min-height: 0;
     order: 2;
     border-right: 0;
     border-top: 1px solid var(--line);
