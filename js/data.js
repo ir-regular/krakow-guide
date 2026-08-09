@@ -284,17 +284,18 @@ const DISTRICTS = [
 
   /* ══════════════════════════════════════════════════════════════ */
   {
-    name: "Stradom - Kazimierz",
+    name: "Kazimierz",
     icon: "🕎",
     color: "#7d5ba6",
     area: [
-    [50.0521, 19.9335],
-    [50.0542, 19.9398],
-    [50.0594, 19.9418],
-    [50.0497, 19.9531],
-    [50.0453, 19.9441],
-    [50.0453, 19.9391],
-    [50.0495, 19.9351]
+      [50.0497, 19.9351],
+      [50.0505, 19.9405],
+      [50.0582, 19.9471],
+      [50.0587, 19.9523],
+      [50.0571, 19.9585],
+      [50.0531, 19.9604],
+      [50.0453, 19.9437],
+      [50.0454, 19.9386]
     ],
     tagline: "The old Jewish quarter — synagogues by day, the best bars by night.",
     description: [
@@ -356,6 +357,13 @@ const DISTRICTS = [
         category: "church",
         coords: [50.0500, 19.9439],
         description: "An enormous Gothic brick church with a startlingly ornate Baroque interior — a boat-shaped pulpit, gilt everywhere. Usually almost empty, which is its own recommendation."
+      },
+      {
+        name: "Father Bernatek Footbridge",
+        namePl: "Kładka Bernatka",
+        category: "landmark",
+        coords: [50.04720796276664, 19.946780261668682],
+        description: "The pedestrian bridge linking Kazimierz to Podgórze, hung with acrobat sculptures and a great many padlocks. The most pleasant way to cross between the two districts."
       }
     ]
   },
@@ -366,8 +374,19 @@ const DISTRICTS = [
     icon: "🌉",
     color: "#2f6f8f",
     area: [
-      [50.0472, 19.9445], [50.0450, 19.9670], [50.0428, 19.9722],
-      [50.0358, 19.9640], [50.0370, 19.9478], [50.0430, 19.9425]
+      [50.0441, 19.9416],
+      [50.0411, 19.9359],
+      [50.0362, 19.9404],
+      [50.0299, 19.9517],
+      [50.0263, 19.9737],
+      [50.0319, 19.9825],
+      [50.0403, 19.9830],
+      [50.0406, 19.9763],
+      [50.0449, 19.9733],
+      [50.0490, 19.9675],
+      [50.0502, 19.9630],
+      [50.0519, 19.9616],
+      [50.0448, 19.9458]
     ],
     tagline: "Across the river: the ghetto memorial, Schindler's factory, and mounds to climb.",
     description: [
@@ -412,20 +431,6 @@ const DISTRICTS = [
         category: "museum",
         coords: [50.0470, 19.9628],
         description: "The contemporary art museum, in converted factory halls right next to Schindler's. A useful and deliberate palate cleanser if you've just come out of the occupation museum."
-      },
-      {
-        name: "Father Bernatek Footbridge",
-        namePl: "Kładka Bernatka",
-        category: "landmark",
-        coords: [50.0491, 19.9483],
-        description: "The pedestrian bridge linking Kazimierz to Podgórze, hung with acrobat sculptures and a great many padlocks. The most pleasant way to cross between the two districts."
-      },
-      {
-        name: "Forum Przestrzenie",
-        category: "cafe",
-        coords: [50.0475, 19.9346],
-        description: "A derelict communist-era hotel repurposed as a bar and café, with deckchairs on the riverbank terrace facing Wawel. Best in the late afternoon.",
-        tip: "Technically just west of Podgórze proper, but it's a ten-minute walk along the river and worth it."
       }
     ]
   },
@@ -586,6 +591,64 @@ const DISTRICTS = [
         coords: [50.05064514485184, 19.931579593036506],
         description: "A striking modern building on the riverbank, designed by the Japanese architect Arata Isozaki, built to house Feliks 'Manggha' Jasieński's collection of Japanese art and prints — one of the largest such collections in Europe. Also runs temporary exhibitions and events tied to Japanese culture.",
         tip: "The riverside terrace café is worth a stop even if you skip the galleries."
+      },
+      {
+        name: "Hotel Forum",
+        category: "landmark",
+        coords: [50.0475, 19.9346],
+        description: "A derelict communist-era hotel on the riverbank facing Wawel. Forum Przestrzenie, the bar and café that used to fill the old lobby and terrace, has closed — worth checking what, if anything, currently occupies the space before making a special trip."
+      }
+    ]
+  },
+
+  /* ══════════════════════════════════════════════════════════════ */
+  {
+    name: "Aleje",
+    icon: "🎓",
+    color: "#a8863b",
+    // A single ring with a "keyhole" cut into it — it follows the outer
+    // Aleje Trzech Wieszczów ring road most of the way round, then dips
+    // inward along the Old Town's own boundary and back out again, so
+    // the shaded area on the map correctly excludes the Old Town instead
+    // of drawing on top of it.
+    area: [
+      [50.0544, 19.9280],
+      [50.0622, 19.9232],
+      [50.0699, 19.9270],
+      [50.0737, 19.9347],
+      [50.0730, 19.9438],
+      [50.0688, 19.9494],
+      [50.0670, 19.9580],
+      [50.0617, 19.9604],
+      [50.0575, 19.9590],
+      [50.0584, 19.9534],
+      [50.0584, 19.9471],
+      [50.0508, 19.9408],
+      [50.0500, 19.9350],
+      [50.0518, 19.9339],
+      [50.0545, 19.9401],
+      [50.0588, 19.9412],
+      [50.0611, 19.9443],
+      [50.0644, 19.9450],
+      [50.0662, 19.9400],
+      [50.0661, 19.9360],
+      [50.0621, 19.9318],
+      [50.0553, 19.9348],
+      [50.0545, 19.9325],
+      [50.0550, 19.9304]
+    ],
+    tagline: "The ring of grand 19th-century boulevards around the Old Town.",
+    description: [
+      "Once the Old Town's fortifications came down, the city expanded outward along the Aleje Trzech Wieszczów — a ring boulevard laid out where the walls used to be, echoing Vienna's Ringstrasse. What grew up inside that ring over the following decades is a belt of grand townhouses, university buildings and parks, distinct from both the medieval core and the outer districts.",
+      "It's the Jagiellonian University's modern heartland as much as the Old Town is its historic one, plus the National Museum's main building and some of the city's best Art Nouveau architecture."
+    ],
+    places: [
+      {
+        name: "Kraków Główny",
+        namePl: "Dworzec Kolejowy - Kraków Główny",
+        category: "landmark",
+        coords: [50.06839954457029, 19.94750398997638],
+        description: "The city's main railway station, rebuilt in the 2000s into a station-cum-shopping-centre (Galeria Krakowska sits right on top of the platforms). Where almost every train in and out of Kraków — including from the airport — arrives and leaves."
       }
     ]
   }
