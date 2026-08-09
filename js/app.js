@@ -103,7 +103,7 @@
   const shapeStyle = (p, color, active) =>
     p.area
       ? { color, weight: active ? 3 : 2, opacity: active ? .95 : .7,
-          fillColor: color, fillOpacity: active ? .3 : .15 }
+          fillColor: color, fillOpacity: active ? .45 : .15 }
       : { color, weight: active ? 11 : 7, opacity: active ? .9 : .55,
           lineCap: "round", lineJoin: "round" };
 
@@ -202,11 +202,16 @@
   let markersById = {};   // id -> marker, so the sidebar can highlight pins
   let shapesById = {};    // id -> polygon/polyline, for places that are regions
 
-  const pinIcon = (emoji, color, kind, label) =>
+  // showIcon is false for anything drawn as a shape (area/path) rather than
+  // a single point — the shape itself is already on the map, and a pin on
+  // top of it both implies a specific spot (misleading for a whole region)
+  // and can swallow small shapes entirely under its own circle. The label
+  // still shows, just without the icon above it.
+  const pinIcon = (emoji, color, kind, label, showIcon = true) =>
     L.divIcon({
       className: "",
       html:
-        `<div class="pin pin-${kind}" style="background:${color}">${emoji}</div>` +
+        (showIcon ? `<div class="pin pin-${kind}" style="background:${color}">${emoji}</div>` : "") +
         (label ? `<div class="pin-label">${esc(label)}</div>` : ""),
       iconSize: kind === "district" ? [40, 40] : [30, 30],
       iconAnchor: kind === "district" ? [20, 20] : [15, 15]
@@ -264,19 +269,23 @@
 
     districts.forEach((d) => {
       if (d.area) {
-        L.polygon(d.area, {
+        const drawn = L.polygon(d.area, {
           className: "district-area",
           color: d.color, weight: 2, opacity: .75,
           fillColor: d.color, fillOpacity: .13
         })
           .on("click", () => { location.hash = "/" + d.id; })
-          .on("mouseover", (e) => e.target.setStyle({ fillOpacity: .28 }))
+          .on("mouseover", (e) => e.target.setStyle({ fillOpacity: .45 }))
           .on("mouseout",  (e) => e.target.setStyle({ fillOpacity: .13 }))
           .addTo(layer);
+
+        // So hovering/selecting this district's sidebar card still gives
+        // some visual feedback on the map now that it has no pin to light up.
+        shapesById[d.id] = { layer: drawn, place: d, color: d.color };
       }
 
       const marker = L.marker(d.center, {
-        icon: pinIcon(d.icon, d.color, "district", d.name),
+        icon: pinIcon(d.icon, d.color, "district", d.name, !d.area),
         riseOnHover: true
       })
         .on("click", () => { location.hash = "/" + d.id; })
@@ -301,7 +310,7 @@
       }
 
       const marker = L.marker(t.coords, {
-        icon: pinIcon(c.icon, c.color, "place", t.name),
+        icon: pinIcon(c.icon, c.color, "place", t.name, !shape),
         riseOnHover: true
       })
         .on("click", () => { location.hash = "/" + t.id; })
@@ -398,7 +407,7 @@
     visiblePlaces.forEach((p) => {
       const c = categoryFor(p.category);
       const marker = L.marker(p.coords, {
-        icon: pinIcon(c.icon, c.color, "place", p.name),
+        icon: pinIcon(c.icon, c.color, "place", p.name, !shapeOf(p)),
         riseOnHover: true
       })
         .on("click", () => { location.hash = `/${d.id}/${p.id}`; })
