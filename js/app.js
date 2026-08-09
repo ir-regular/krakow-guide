@@ -286,7 +286,13 @@
 
       const marker = L.marker(d.center, {
         icon: pinIcon(d.icon, d.color, "district", d.name, !d.area),
-        riseOnHover: true
+        riseOnHover: true,
+        // No pin to click when there's an area — the shape already has its
+        // own click handler above. Without this, Leaflet still gives the
+        // marker its usual interactive hit-box (sized for a pin that isn't
+        // there), which sits right at the shape's centre and blocks hover
+        // on whatever's underneath it.
+        interactive: !d.area
       })
         .on("click", () => { location.hash = "/" + d.id; })
         .addTo(layer);
@@ -311,7 +317,8 @@
 
       const marker = L.marker(t.coords, {
         icon: pinIcon(c.icon, c.color, "place", t.name, !shape),
-        riseOnHover: true
+        riseOnHover: true,
+        interactive: !shape   // see the district marker above for why
       })
         .on("click", () => { location.hash = "/" + t.id; })
         .addTo(layer);
@@ -408,7 +415,8 @@
       const c = categoryFor(p.category);
       const marker = L.marker(p.coords, {
         icon: pinIcon(c.icon, c.color, "place", p.name, !shapeOf(p)),
-        riseOnHover: true
+        riseOnHover: true,
+        interactive: !shapeOf(p)   // see the district marker in drawHomeLayer() for why
       })
         .on("click", () => { location.hash = `/${d.id}/${p.id}`; })
         .addTo(layer);
