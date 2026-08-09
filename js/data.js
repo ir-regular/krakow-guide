@@ -422,7 +422,7 @@ const DISTRICTS = [
         name: "Krakus Mound",
         namePl: "Kopiec Krakusa",
         category: "park",
-        coords: [50.0389, 19.9611],
+        coords: [50.03812037355079, 19.958443905333795],
         description: "A grass mound of genuinely unknown origin and age — possibly a Celtic or early Slavic burial. Ten minutes uphill for the best free panorama of the city.",
         tip: "Best at sunset, and much less busy than the Kościuszko Mound across town. Bring something to sit on."
       },
@@ -475,6 +475,12 @@ const DISTRICTS = [
         category: "food",
         coords: [50.0716, 20.0369],
         description: "A restaurant on the central plaza that has been running since 1956 and has changed its interior approximately not at all. Solid Polish food; the room is the point."
+      },
+      {
+        name: "Kopiec Wandy",
+        category: "park",
+        coords: [50.07024350327653, 20.0680775156796],
+        description: "A legendary burial mound on the eastern edge of the city, said to hold Princess Wanda — daughter of the legendary King Krak — who drowned herself in the Vistula rather than marry a German prince who'd invaded to force the marriage. Quiet and rarely visited compared to Krakus or Kościuszko."
       }
     ]
   },
