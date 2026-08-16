@@ -203,6 +203,21 @@ const DISTRICTS = [
         tip: "Buy interior tickets online in advance in summer — the timed slots for the State Rooms genuinely sell out."
       },
       {
+        name: "Wawel Dragon Statue",
+        namePl: "Smok Wawelski",
+        category: "landmark",
+        coords: [50.053045062426115, 19.933594853367286],
+        description: "Bronisław Chromy's six-metre bronze dragon, coiled on the rock at the foot of Wawel Hill. Designed as a fountain in 1965 but built breathing real fire instead, from a gas jet that fires every few minutes.",
+        tip: "It marks the exit of the Dragon's Den cave that runs down through the hill — most people meet it on the way out, not the way in."
+      },
+      {
+        name: "Zbruch Idol Replica",
+        namePl: "Replika Światowida ze Zbrucza",
+        category: "landmark",
+        coords: [50.054309795050614, 19.938456263164714],
+        description: "A stone copy, put up in 1968, of the four-faced Slavic idol pulled from a riverbed in 1848 and now held in the Archaeological Museum. It still collects candles and small offerings at its base from Kraków's modern Slavic pagan community."
+      },
+      {
         name: "Barbican & Floriańska Gate",
         namePl: "Barbakan",
         category: "history",
@@ -215,6 +230,13 @@ const DISTRICTS = [
         coords: [50.0614, 19.9330],
         description: "The oldest building of the Jagiellonian University, with a beautiful arcaded courtyard and a collection that includes instruments Copernicus plausibly handled as a student here.",
         tip: "The courtyard is free to walk into. Go for that alone even if you skip the museum."
+      },
+      {
+        name: "Archaeological Museum",
+        namePl: "Muzeum Archeologiczne",
+        category: "museum",
+        coords: [50.05769339068021, 19.936739058634153],
+        description: "Poland's oldest archaeological museum, founded in 1850 and housed since 1967 in a former convent on Senacka. Its centrepiece is the original Zbruch Idol — a four-faced 9th-century Slavic idol pulled from a Ukrainian riverbed in 1848 — alongside sizeable Egyptian and Peruvian collections that feel unexpected this far from either."
       },
       {
         name: "Skarbonka",
@@ -431,6 +453,14 @@ const DISTRICTS = [
         category: "museum",
         coords: [50.0470, 19.9628],
         description: "The contemporary art museum, in converted factory halls right next to Schindler's. A useful and deliberate palate cleanser if you've just come out of the occupation museum."
+      },
+      {
+        name: "Kraków Spa Pump Room",
+        namePl: "Krakowska Pijalnia Zdrojowa",
+        category: "landmark",
+        coords: [50.03694789294806, 19.939704884004918],
+        description: "A modern pump room built over mineral springs a well-digger stumbled on by accident in 1898, going on to found his own bathhouse here. The current building, opened in 2021 in a nod to the original, lets you sample the mineral water for free in a small park well off the tourist track.",
+        tip: "This one sits south-west of the rest of Podgórze's sights, closer to Dębniki than the ghetto sites — worth folding in if you're already this end of the district rather than a special trip on its own."
       }
     ]
   },
@@ -550,7 +580,8 @@ const DISTRICTS = [
         category: "museum",
         coords: [50.0543243871766, 19.82664901651445],
         description: "A working astronomical observatory in a former 19th-century Austrian fort on a hilltop in Las Wolski, run by the Jagiellonian University. Runs public tours and stargazing evenings.",
-        hours: "Limited and weather-dependent — check ahead before making the trip out."
+        hours: "Limited and weather-dependent — check ahead before making the trip out.",
+        link: "https://oa.fais.uj.edu.pl/astronomia-dla-wszystkich/wieczory-z-gwiazdami"
       }
     ]
   },
@@ -655,6 +686,20 @@ const DISTRICTS = [
         category: "landmark",
         coords: [50.06839954457029, 19.94750398997638],
         description: "The city's main railway station, rebuilt in the 2000s into a station-cum-shopping-centre (Galeria Krakowska sits right on top of the platforms). Where almost every train in and out of Kraków — including from the airport — arrives and leaves."
+      },
+      {
+        name: "Botanical Garden",
+        namePl: "Ogród Botaniczny UJ",
+        category: "park",
+        coords: [50.063772604949634, 19.95581156093946],
+        description: "Poland's oldest botanical garden, founded in 1783 and still run by the Jagiellonian University — nine and a half hectares holding some 5,000 species, a celebrated orchid collection, and greenhouses to duck into on a wet day.",
+        tip: "The grounds are seasonal (roughly spring to autumn); the greenhouses stay open year-round."
+      },
+      {
+        name: "Pracownia Cukiernicza - Lody na Starowiślnej",
+        category: "icecream",
+        coords: [50.051879078361964, 19.95002720204876],
+        description: "Simply the best ice cream anywhere. No further argument needed."
       }
     ]
   }
@@ -704,5 +749,48 @@ const TRIPS = [
     category: "swimming",
     coords: [50.03298763667974, 19.993765040100666],
     description: "A large lake on a former sand quarry in the south of the city, and one of the places locals actually go to swim in summer rather than just tourists — day-trippers tend to head for Zakrzówek instead, which keeps this one comparatively uncrowded. Shoreline ranges from a developed beach with bars to quieter, wilder stretches."
+  },
+  {
+    name: "Bochnia Salt Mine",
+    namePl: "Kopalnia Soli Bochnia",
+    category: "museum",
+    coords: [49.96899372724636, 20.417660169221314],
+    description: "Poland's oldest salt mine, worked continuously since 1248 and covered by the same UNESCO listing as Wieliczka — quieter, and arguably more fun: a boat ride along a flooded gallery, a train through the workings, and a 140-metre slide down to the lower level.",
+    tip: "You can also sleep underground, 250 metres down, if a visit isn't enough."
+  },
+  {
+    name: "Niepołomice Royal Castle",
+    namePl: "Zamek Królewski w Niepołomicach",
+    category: "landmark",
+    coords: [50.03420750564933, 20.21784176616286],
+    description: "A hunting lodge built by Kazimierz the Great in the 14th century and expanded by later Jagiellonian kings into a proper residence, often called Kraków's 'second Wawel'. It sits at the edge of the Niepołomice Forest, once a royal hunting ground and still one of the largest woodlands near the city."
+  },
+  {
+    name: "Kalwaria Zebrzydowska",
+    namePl: "Sanktuarium Pasyjno-Maryjne w Kalwarii Zebrzydowskiej",
+    category: "church",
+    coords: [49.86026797880666, 19.67207108438322],
+    description: "A Baroque pilgrimage complex founded in 1600: 42 churches and chapels strung across seven kilometres of hillside paths in a deliberate echo of the holy sites of Jerusalem. A UNESCO World Heritage site, and still an active place of pilgrimage rather than a museum piece.",
+    tip: "Walking the full dróżki route takes the better part of a day; the basilica and a short stretch of path make a fine shorter visit."
+  },
+  {
+    name: "Lanckorona",
+    category: "landmark",
+    coords: [49.84582357481432, 19.716931019596675],
+    description: "A hilltop village rebuilt in wood after an 1869 fire, its market square still ringed with 19th-century arcaded timber houses. Castle ruins on the hill above give a wide view over the Beskid foothills, and the village has a sideline in angel-themed ceramics sold from doorsteps."
+  },
+  {
+    name: "Dolina Bolechowicka",
+    category: "park",
+    coords: [50.153928642999915, 19.78048242944698],
+    description: "A short limestone valley in the Dolinki Krakowskie, opened by the Bolechowicka Gate — twin 30-metre rock towers that have been a training ground for Polish climbers since the 1930s. A gentle walk even if you're not there to climb."
+  },
+  {
+    name: "Dolina Kluczwody - Mammoth Cave",
+    namePl: "Dolina Kluczwody - Jaskinia Mamutowa",
+    category: "park",
+    coords: [50.17048436322781, 19.805719543035035],
+    description: "Another reserve valley in the Dolinki Krakowskie, cut by the Kluczwoda stream, with low ruins of a 14th-century watchtower further along. Its cave — properly Jaskinia Wierzchowska Dolna, nicknamed 'Mammoth' after a mammoth tusk found inside — is a further draw for climbers alongside the rock itself.",
+    tip: "The cave is a short, easy scramble rather than a serious caving trip, but bring a torch."
   }
 ];
