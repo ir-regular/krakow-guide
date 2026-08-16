@@ -424,27 +424,34 @@
       markersById[p.id] = marker;
     });
 
-    if (!activePlaceId) {
-      if (visiblePlaces.length > 1) {
-        // Frame the pins plus the full extent of any region-shaped places.
-        const bounds = L.latLngBounds(visiblePlaces.map((p) => p.coords));
-        visiblePlaces.forEach((p) => {
-          const shape = shapeOf(p);
-          if (shape) bounds.extend(L.latLngBounds(flattenPoints(shape)));
-        });
-        map.fitBounds(bounds, { padding: [60, 60] });
-      } else if (visiblePlaces.length === 1) {
-        map.setView(visiblePlaces[0].coords, d.zoom);
-      } else {
-        map.setView(d.center, d.zoom);
-      }
-    }
+    if (!activePlaceId) fitDistrictView(d, visiblePlaces);
 
     renderLegend(visiblePlaces);
 
     const place = activePlaceId ? findPlace(d, activePlaceId) : null;
     if (place) renderPlace(d, place);
     else renderDistrictOverview(d);
+  }
+
+  // Frames the map on a district's places: all of them if there's more than
+  // one, a close-in view on the one if there's only one, else the district's
+  // own center/zoom. Shared by showDistrict() (a fresh district) and route()
+  // (returning to a district's overview from one of its places, which reuses
+  // the already-drawn pins and so skips showDistrict() entirely).
+  function fitDistrictView(d, visiblePlaces) {
+    if (visiblePlaces.length > 1) {
+      // Frame the pins plus the full extent of any region-shaped places.
+      const bounds = L.latLngBounds(visiblePlaces.map((p) => p.coords));
+      visiblePlaces.forEach((p) => {
+        const shape = shapeOf(p);
+        if (shape) bounds.extend(L.latLngBounds(flattenPoints(shape)));
+      });
+      map.fitBounds(bounds, { padding: [60, 60] });
+    } else if (visiblePlaces.length === 1) {
+      map.setView(visiblePlaces[0].coords, d.zoom);
+    } else {
+      map.setView(d.center, d.zoom);
+    }
   }
 
   function renderDistrictOverview(d) {
@@ -605,7 +612,10 @@
       }
       const place = placeId ? findPlace(district, placeId) : null;
       if (place) renderPlace(district, place);
-      else renderDistrictOverview(district);
+      else {
+        fitDistrictView(district, district.places.filter(isInSeason));
+        renderDistrictOverview(district);
+      }
       return;
     }
 
